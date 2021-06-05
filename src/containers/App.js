@@ -3,6 +3,7 @@ import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
 import "../styles/app.css";
 import Scroll from "../components/Scroll";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 class App extends Component {
   constructor() {
@@ -20,6 +21,8 @@ class App extends Component {
         this.setState({ robots: users });
       });
   }
+
+  E;
 
   onSearchChange = (event) => {
     this.setState({ searchField: event.target.value });
@@ -41,7 +44,9 @@ class App extends Component {
         <h1 className="f1">R o b o f r i e n d s</h1>
         <SearchBox searchChange={this.onSearchChange} />
         <Scroll>
-          <CardList robots={filteredRobots} />
+          <ErrorBoundary>
+            <CardList robots={filteredRobots} />
+          </ErrorBoundary>
         </Scroll>
       </div>
     );
